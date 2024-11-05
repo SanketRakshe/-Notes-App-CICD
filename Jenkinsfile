@@ -1,7 +1,7 @@
 @Library("Shared") _
 pipeline{
     
-    agent { label "vinod"}
+    agent { label "sanket"}
     
     stages{
         
@@ -12,28 +12,31 @@ pipeline{
                 }
             }
         }
+        
         stage("Code"){
             steps{
                script{
-                clone("https://github.com/LondheShubham153/django-notes-app.git","main")
+                clone("https://github.com/SanketRakshe/Notes-App-CICD.git","master")
                }
-                
             }
         }
+        
         stage("Build"){
             steps{
                 script{
-                docker_build("notes-app","latest","trainwithshubham")
+                docker_build("notes-app","latest","sanketrakshe")
                 }
             }
         }
+        
         stage("Push to DockerHub"){
             steps{
                 script{
-                    docker_push("notes-app","latest","trainwithshubham")
+                    docker_push("notes-app","latest","sanketrakshe")
                 }
             }
         }
+        
         stage("Deploy"){
             steps{
                 echo "This is deploying the code"
